@@ -1,0 +1,21 @@
+
+
+{% block title %}{{ default:"New Transaction" }} | {{ transaction.client }} {{ block.super }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% url 'testrun:detail' pk=transaction.pk %}">{{ transaction }}</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="row columns">
+    {{ block.super }}
+        <h1>{{ form.instance.title|default:"Make a new transaction" }}</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="button" value="Save">
+    
+        </form>
+</div> 
+
+{% endblock %}

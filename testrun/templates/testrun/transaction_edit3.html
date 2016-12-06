@@ -1,0 +1,106 @@
+{% extends "testrun/layout.html" %}
+
+{% block content %}
+<a href="{% url 'testrun:index' %}"> <--Back to list </a>
+
+   
+        <h2> Transaction {{ transaction.id }} </h2>
+
+        <form method="POST" action="{% url 'testrun:transaction_edit' transaction_pk=transaction.id %}" class="form-style-1">
+         {% csrf_token %}
+            <table width="25%">
+
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Date Created:</label></td>
+                <td>{{ form.date_created }}</td>
+            </tr>
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Transaction Date:</label></td>
+                <td><input  id="id_date_transaction" type="text" name= "date_transaction"  value="{{ transaction.date_transaction}}" /></td>
+            </tr> 
+
+
+
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Card Type:</label></td>
+                <td><input id="id_card_type" type="text" name="card_type" value="{{transaction.card_type}}" /></td>
+            </tr>
+           <!--<tr>
+              <td><label for="{{ form.subject.id_for_label }}">Card Type:</label></td>
+                <td><select name="card_type">
+                    {% for card in card_list %} 
+                    {% if card.type == transaction.card_type %}
+                        <option value="{{ card.type }}" selected>{{ card.type }}</option>   
+                    {%else%}
+                        <option value="{{ card.type }}" >{{ card.type }}</option>      
+                    {%endif%}   
+                    {% endfor %}   
+                    <select>  
+
+                </td>
+            </tr> -->
+
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Supplier:</label></td>
+                <td><input id="id_supplier" type="text" name="supplier"  value="{{transaction.supplier}}" /></td>
+            </tr>
+            <tr> 
+                <td><label for="{{ form.subject.id_for_label }}">Purchase Details:</label></td>
+                <td><input id="id_purchase_details" type="text" name="purchase_details"  value="{{transaction.purchase_details}}" /></td>
+            </tr> 
+             
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Amount:</label></td>
+                <td><input id="id_amount" type="text"  name="amount" value="{{transaction.amount}}" /></td>
+            </tr>
+                
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">GST:</label></td>
+                <td><select name='GST'>  
+                    {% if transaction.GST == 'ex GST' %}        
+                      <option value="ex GST" selected>Ex Gst</option>
+                      <option value="inc GST" >Inc Gst</option>
+                    {% else %}
+                      <option value="ex GST" >Ex Gst</option>
+                      <option value="inc GST" selected>Inc Gst</option>
+                    {%endif%}    
+
+                </select>
+                </td>
+            </tr> 
+            
+            <tr>    
+                <td><label for="{{ form.subject.id_for_label }}">Client:</label></td>
+                <td><input id="id_GST" type="text" name="client"  value="{{transaction.client}}" /></td>
+              
+            </tr>
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Wfm Job Number</label></td>
+                <td><input id="id_wfm_job_number" type="text" name="wfm_job_number" value="{{transaction.wfm_job_number}}" /></td>
+            </tr>
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Staff:</label></td>
+                <td><input id="id_staff" type="text" name="staff"  value="{{transaction.staff}}" /> </td>
+            </tr>
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Notes:</label></td>
+                <td><textarea id="id_notes"  name="notes" >{{ transaction.notes }}</textarea></td>
+            </tr>
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Processed:</label></td>
+                <td>{% if transaction.processed == True %}
+                         <input type="checkbox" name="processed" value='True' checked>
+                    {% else %}
+                         <input type="checkbox" name="processed" value='True'  > 
+                    {%endif%}   </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> <input type="submit" class="button" value="Save" align="center"></td>
+            </tr> 
+            </table>
+        </form>
+
+
+{% endblock %}
+   

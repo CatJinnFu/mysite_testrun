@@ -1,0 +1,71 @@
+{% extends "testrun/layout.html" %}
+
+{% block content %}
+<a href="{% url 'testrun:index' %}"> <--Back to list </a>
+
+   
+        <h2> Transaction {{ transaction.id }} </h2>
+        <form method="POST" action="{% url 'testrun:transaction_edit' transaction_pk=transaction.id %}" class="form-style-1">
+            {% csrf_token %}
+            <table width="25%">
+
+            <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Date:</label></td>
+          		<td><input id="id_date" type="text" name="date"  value="{{transaction.date}}" /></td>
+            </tr>
+            <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Card Type:</label></td>
+            	<td><input id="id_card_type" type="text" name="card_type" value="{{transaction.card_type}}" /></td>
+            </tr>
+             <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Company:</label></td>
+            	<td><input id="id_company" type="text" name="company"  value="{{transaction.company}}" /> </td>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Purchase Details:</label></td>
+            	<td><input id="id_purchase_details" type="text" name="company"  value="{{transaction.purchase_details}}" /></td>
+            </tr>
+             </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Notes:</label></td>
+            	<td><textarea id="id_notes"  name="company" >{{transaction.notes}}</textarea></td>
+            </tr>
+                 </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Client:</label></td>
+            	<td><input id="id_client" type="text" name="client"  value="{{transaction.client}}" /></td>
+            </tr>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">GST:</label></td>
+            	<td><input id="id_GST" type="text" name="client"  value="{{transaction.GST}}" /></td>
+            </tr>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Amount:</label></td>
+            	<td><input id="id_amount" type="text" name="client"  value="{{transaction.amount}}" /> </td>
+            </tr>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Staff:</label></td>
+            	<td><input id="id_staff" type="text" name="staff"  value="{{transaction.staff}}" />  </td>
+            </tr>
+			<tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Comments:</label></td>
+            	<td><textarea id="id_comments"  name="comments" >{{transaction.comments}}</textarea></td>
+            </tr>
+            <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Processed:</label></td>
+            	<td><input id="processed" type="text" name="processed" value="{{transaction.processed}}"> </td>
+            </tr>
+            <tr>
+            	<td> </td>
+            	<td> <input type="submit" class="button" value="Save" align="center"></td>
+           
+            </tr>
+    		</table>
+        </form>
+
+
+{% endblock %}
+   

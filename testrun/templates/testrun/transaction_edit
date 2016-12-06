@@ -1,0 +1,20 @@
+<a href="{% url 'testrun:index' %}"> <--Back to list </a>
+
+
+<h1> {{ transaction.pk }} ${{ transaction.amount }} </h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'testrun:results' transaction.id %}" method="post" class="form-style-1">
+{% csrf_token %}
+	{% if transaction.processed == True %}
+		<input type="checkbox" name="processed" value='True' checked>
+	{% else %}
+		<input type="checkbox" name="processed" value='True'  >	
+	{%endif%}	
+	<label >processed ={{ transaction.processed }}</label><br /><br />
+	<input type="submit" value="Submit" />
+ </form>
+
+ 
+   

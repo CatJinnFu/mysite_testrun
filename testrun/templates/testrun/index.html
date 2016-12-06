@@ -1,0 +1,106 @@
+{% extends "testrun/layout.html" %}
+
+{% block content %}
+<h2>List of transactions </h2>
+
+<p><a href="{% url 'testrun:transaction_create' %}"> Make new Transaction </a></p>
+<p><form method="POST" action="{% url 'testrun:search' %}" >
+		{% csrf_token %}
+		<input type="submit" value="Search Amount" /><input type="text" name="search"  >		
+</form></p>
+{% if latest_transaction_list %}
+
+    <table>
+    <tr>
+    <th>Date created</th>
+    <th>Transaction date</th>
+    <th><a style="color:blue;" href="{% url 'testrun:card' %}">Card Type</a></th>
+    <th>Supplier</th>
+    <th>Details</th>
+    <th>Amount</th>
+    <th><a style="color:blue;" href="{% url 'testrun:client' %}">Client</a></th>
+    <th>WFM Job Number</th>
+    <th><a style="color:blue;" href="{% url 'testrun:staff'  %}">Staff</a></th>
+    <th>Notes</th>
+    <th>Processed (Accounts Use Only)</th>
+    </tr>
+     {% for transaction in latest_transaction_list %}
+
+       {% if transaction.processed == True %}
+       	<tr>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.date_created   }}</a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.date_transaction   }}</a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.card_type }}</a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.supplier }}</a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.purchase_details }}</a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.amount }} {{ transaction.GST }}</a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.client }}</a> </td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.wfm_job_number  }} </a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.staff  }} </a></td>
+        <td><a style="color:red;" href="{% url 'testrun:detail' transaction.id %}">{{ transaction.notes   }} </a></td>
+        <td>
+        	<form action="{% url 'testrun:results' transaction.id %}" method="post" >
+				{% csrf_token %}
+				{% if transaction.processed == True %}
+					<input type="checkbox" name="processed" value='True' checked>
+				{% else %}
+					<input type="checkbox" name="processed" value='True'  >	
+				{%endif%}	
+					
+				
+				<label> 
+					{% if transaction.processed == True %} Yes
+					{% else %} No
+					{%endif%}	
+
+				<input type="submit" value="Process" />	
+							
+				</label>
+			</form>
+        </td>	
+        </tr>
+        {% else %}
+        <tr>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.date_created }}</a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.date_transaction }}</a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.card_type }}</a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.supplier }}</a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.purchase_details }}</a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.amount}} {{ transaction.GST}} 
+         </a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.client }}</a> </td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.wfm_job_number }} </a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.staff }} </a></td>
+        <td><a href="{% url 'testrun:transaction_edit' transaction.id %}" class="process">{{ transaction.notes  }} </a></td>
+        <td>
+        	<form action="{% url 'testrun:results' transaction.id %}" method="post" >
+				{% csrf_token %}
+				{% if transaction.processed == True %}
+					<input type="checkbox" name="processed" value='True' checked>
+				{% else %}
+					<input type="checkbox" name="processed" value='True'  >	
+				{%endif%}	
+					
+				
+				<label> 
+					{% if transaction.processed == True %} Yes
+					{% else %} No
+					{%endif%}	
+
+				<input type="submit" value="Process" />	
+							
+				</label>
+			</form>
+        </td>	
+
+
+        </tr>
+        {%endif%}
+	  {% endfor %}	
+    </table>
+    
+{% else %}
+    <p>No transactions are available.</p>
+{% endif %}
+
+{% endblock %}

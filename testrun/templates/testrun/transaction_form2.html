@@ -1,0 +1,108 @@
+{% extends "testrun/layout.html" %}
+
+{% block content %}
+<a href="{% url 'testrun:index' %}"> <--Back to list </a>
+
+
+
+   
+        <h2>{{ form.instance.title|default:"Make a new transaction" }}</h2>
+        <form method="POST" action="" class="form-style-1">
+            {% csrf_token %}
+            <table width="25%">
+
+            <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Date Created:</label></td>
+          		<td>{{ form.date_created  }}</td>
+            </tr>
+            <tr>
+                <td><label for="{{ form.subject.id_for_label }}">Transaction Date:</label></td>
+                <td>{{ form.date_transaction  }}</td>
+            </tr>
+            <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Card Type:</label></td>
+            	<td>
+                 <select name="card_type">
+                 <option value="" selected></option>
+                 {% for card in card_list %}
+                   
+                     <option value="{{ card.type }}" >{{ card.type }}</option>     
+                   
+                 {% endfor %}    
+                </select>
+                </td>
+            </tr>
+             <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Supplier:</label></td>
+            	<td>{{ form.supplier }}</td>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Purchase Details:</label></td>
+            	<td>{{ form.purchase_details}}</td>
+            </tr>
+             </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Amount:</label></td>
+            	<td>{{ form.amount}}</td>
+            </tr>
+                 </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">GST:</label></td>
+            	<td>
+                <select name="GST">        
+                    <option value="ex GST" >Ex Gst</option>
+                    <option value="inc GST" selected>Inc Gst</option>
+                </select>
+                </td>
+            </tr>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Client:</label></td>
+            	<td>
+                 <select name="client">
+                 <option value="" selected></option>
+                 {% for client in client_list %}
+                   
+                     <option value="{{ client.client_name }}" >{{ client.client_name }}</option>     
+                   
+                 {% endfor %}    
+                </select>
+                </td>
+            </tr>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Wfm Job Number:</label></td>
+            	<td>{{ form.wfm_job_number }}</td>
+            </tr>
+            </tr>
+                <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Staff:</label></td>
+            	<td>
+                 <select name="staff">
+                   <option value="" selected></option> 
+                 {% for staff in staff_list %}
+                   
+                     <option value="{{ staff.staff_name }}" >{{ staff.staff_name }}</option>     
+                   
+                 {% endfor %}    
+                </select>
+                </td>
+            </tr>
+			<tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Notes:</label></td>
+            	<td>{{ form.notes}}</td>
+            </tr>
+            <tr>
+            	<td><label for="{{ form.subject.id_for_label }}">Processed:</label></td>
+            	<td>{{ form.processed}}</td>
+            </tr>
+            <tr>
+            	<td> </td>
+            	<td> <input type="submit" class="button" value="Save" align="center"></td>
+           
+            </tr>
+    		</table>
+        </form>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+<a href="{% url 'testrun:index' %}"> <--Back to list </a>
+
+
+	<p><form method="POST" action="{% url 'testrun:client_add' %}" >
+		{% csrf_token %}
+		<input type="submit" value="Add Client" /><input type="text" name="client"  >		
+	</form></p>
+
+<table>
+{% for client in client_list %}
+<p><form method="POST" action="{% url 'testrun:client_delete' client_pk=client.id %}" >
+{% csrf_token %}
+
+			<tr>
+                <td>{{ client.client_name }}</td>
+                <td><input type="submit" value="Delete Client" /></td>
+            </tr>
+	
+
+</form></p>	
+{% endfor %}
+</table>	
