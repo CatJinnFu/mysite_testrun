@@ -21,7 +21,7 @@
 
             <tr>
                 <td><label for="{{ form.subject.id_for_label }}">Date Created:</label></td>
-                <td>{{ form.date_created  }}</td>
+                <td>{{ date_value  }}</td>
             </tr>
             <tr>
                 <td><label for="{{ form.subject.id_for_label }}">Transaction Date:</label></td>
@@ -87,7 +87,7 @@
                 <td><label for="{{ form.subject.id_for_label }}">Staff:</label></td>
                 <td>
                  <select name="staff">
-                    <option value="" selected></option>
+                    <option value="" selected></option> 
                  {% for staff in staff_list %}
                    
                      <option value="{{ staff.staff_name }}" >{{ staff.staff_name }}</option>     

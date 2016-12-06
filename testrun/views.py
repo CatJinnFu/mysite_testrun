@@ -11,6 +11,8 @@ from .models import Transaction
 from .models import Card_Type
 from .models import Client
 from .models import Staff
+import time
+import datetime
 
 def index(request):
     latest_transaction_list = Transaction.objects.order_by('-date_created')
@@ -171,6 +173,7 @@ def transaction_create(request):
     client_list = Client.objects.all()
     staff_list = Staff.objects.all()
     form = forms.TransactionForm()
+    date_value = datetime.datetime.now()
     
     if request.method == 'POST':
         form = forms.TransactionForm(request.POST)
@@ -185,5 +188,6 @@ def transaction_create(request):
                                                              'transaction' : transaction,
                                                              'card_list' : card_list, 
                                                              'client_list' : client_list,
-                                                             'staff_list' : staff_list
+                                                             'staff_list' : staff_list,
+                                                             'date_value' : date_value
                                                              }) 
