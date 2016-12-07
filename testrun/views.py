@@ -107,15 +107,25 @@ def staff_delete(request, staff_pk=0):
 
     return render(request, 'testrun/staff.html', context)
 
-def search(request):	
-	if request.POST['search']:
-		value = request.POST['search']
+def search_amount(request):	
+	if request.POST['search_amount']:
+		value = request.POST['search_amount']
 		latest_transaction_list = Transaction.objects.filter(amount__contains=value)
 	else:
 		latest_transaction_list = Transaction.objects.order_by('-date_created')	
 
 	context = {'latest_transaction_list': latest_transaction_list,}
 	return render(request, 'testrun/index.html', context)
+
+def search_card_type(request): 
+    if request.POST['search_card_type']:
+        value = request.POST['search_card_type']
+        latest_transaction_list = Transaction.objects.filter(card_type__contains=value)
+    else:
+        latest_transaction_list = Transaction.objects.order_by('-date_created') 
+
+    context = {'latest_transaction_list': latest_transaction_list,}
+    return render(request, 'testrun/index.html', context)
 
 
 def detail(request, transaction_pk):
