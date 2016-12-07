@@ -14,6 +14,21 @@
         <input type="submit" value="Search Card Type" /><input type="text" name="search_card_type"  >     
 </form></p>
 
+<p><form method="POST" action="{% url 'testrun:search_supplier' %}" >
+        {% csrf_token %}
+        <input type="submit" value="Search Supplier" /><input type="text" name="search_supplier"  >     
+</form></p>
+
+<p><form method="POST" action="{% url 'testrun:search_client' %}" >
+        {% csrf_token %}
+        <input type="submit" value="Search Client" /><input type="text" name="search_client"  >     
+</form></p>
+
+<p><form method="POST" action="{% url 'testrun:search_staff' %}" >
+        {% csrf_token %}
+        <input type="submit" value="Search Staff" /><input type="text" name="search_staff"  >     
+</form></p>
+
 
 {% if latest_transaction_list %}
 

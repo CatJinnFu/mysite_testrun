@@ -120,12 +120,42 @@ def search_amount(request):
 def search_card_type(request): 
     if request.POST['search_card_type']:
         value = request.POST['search_card_type']
-        latest_transaction_list = Transaction.objects.filter(card_type__contains=value)
+        latest_transaction_list = Transaction.objects.filter(card_type__contains=value).order_by('-date_created') 
     else:
         latest_transaction_list = Transaction.objects.order_by('-date_created') 
 
     context = {'latest_transaction_list': latest_transaction_list,}
     return render(request, 'testrun/index.html', context)
+
+def search_supplier(request): 
+    if request.POST['search_supplier']:
+        value = request.POST['search_supplier']
+        latest_transaction_list = Transaction.objects.filter(supplier__contains=value).order_by('-date_created') 
+    else:
+        latest_transaction_list = Transaction.objects.order_by('-date_created') 
+
+    context = {'latest_transaction_list': latest_transaction_list,}
+    return render(request, 'testrun/index.html', context)
+
+def search_client(request): 
+    if request.POST['search_client']:
+        value = request.POST['search_client']
+        latest_transaction_list = Transaction.objects.filter(client__contains=value).order_by('-date_created') 
+    else:
+        latest_transaction_list = Transaction.objects.order_by('-date_created') 
+
+    context = {'latest_transaction_list': latest_transaction_list,}
+    return render(request, 'testrun/index.html', context) 
+
+def search_staff(request): 
+    if request.POST['search_staff']:
+        value = request.POST['search_staff']
+        latest_transaction_list = Transaction.objects.filter(staff__contains=value).order_by('-date_created') 
+    else:
+        latest_transaction_list = Transaction.objects.order_by('-date_created') 
+
+    context = {'latest_transaction_list': latest_transaction_list,}
+    return render(request, 'testrun/index.html', context)          
 
 
 def detail(request, transaction_pk):
