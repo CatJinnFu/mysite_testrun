@@ -13,6 +13,7 @@ from .models import Client
 from .models import Staff
 import time
 import datetime
+from django.utils import timezone
 
 def index(request):
     latest_transaction_list = Transaction.objects.order_by('-date_created')
@@ -213,13 +214,15 @@ def transaction_create(request):
     client_list = Client.objects.all()
     staff_list = Staff.objects.all()
     form = forms.TransactionForm()
-    date_value = datetime.datetime.now()
+    form.fields['date_created'].widget.attrs['readonly'] = True
+    date_value =  timezone.now()
     
     if request.method == 'POST':
         form = forms.TransactionForm(request.POST)
         if form.is_valid():
             transact = form.save(commit=False)
             transact.transaction = transaction
+            #transact.date_created = timezone.now()
             transact.save()
             messages.add_message(request, messages.SUCCESS,
                                  "Transaction added!")

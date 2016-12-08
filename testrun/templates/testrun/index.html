@@ -2,33 +2,35 @@
 
 {% block content %}
 <h2>List of transactions </h2>
-
 <p><a href="{% url 'testrun:transaction_create' %}"> Make new Transaction </a></p>
+<table>
+ <tr>
+<td>
 <p><form method="POST" action="{% url 'testrun:search_amount' %}" >
 		{% csrf_token %}
 		<input type="submit" value="Search Amount" /><input type="text" name="search_amount"  >		
-</form></p>
+</form></p></td>
 
-<p><form method="POST" action="{% url 'testrun:search_card_type' %}" >
+<td><p><form method="POST" action="{% url 'testrun:search_card_type' %}" >
         {% csrf_token %}
         <input type="submit" value="Search Card Type" /><input type="text" name="search_card_type"  >     
-</form></p>
+</form></p></td>
 
-<p><form method="POST" action="{% url 'testrun:search_supplier' %}" >
+<td><p><form method="POST" action="{% url 'testrun:search_supplier' %}" >
         {% csrf_token %}
         <input type="submit" value="Search Supplier" /><input type="text" name="search_supplier"  >     
-</form></p>
+</form></p></td>
 
-<p><form method="POST" action="{% url 'testrun:search_client' %}" >
+<td><p><form method="POST" action="{% url 'testrun:search_client' %}" >
         {% csrf_token %}
         <input type="submit" value="Search Client" /><input type="text" name="search_client"  >     
-</form></p>
+</form></p></td>
 
-<p><form method="POST" action="{% url 'testrun:search_staff' %}" >
+<td><p><form method="POST" action="{% url 'testrun:search_staff' %}" >
         {% csrf_token %}
         <input type="submit" value="Search Staff" /><input type="text" name="search_staff"  >     
-</form></p>
-
+</form></p></td></tr>
+</table>
 
 {% if latest_transaction_list %}
 
